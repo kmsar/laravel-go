@@ -2,16 +2,16 @@ package querybuilder
 
 import (
 	"fmt"
-	"github.com/goal-web/contracts"
+	"github.com/kmsar/laravel-go/Framework/Contracts/IDatabase"
 	"strings"
 )
 
-const RandomOrder contracts.OrderType = "RANDOM()"
-const RandOrder contracts.OrderType = "RAND()"
+const RandomOrder IDatabase.OrderType = "RANDOM()"
+const RandOrder IDatabase.OrderType = "RAND()"
 
 type OrderBy struct {
 	field          string
-	fieldOrderType contracts.OrderType
+	fieldOrderType IDatabase.OrderType
 }
 
 type OrderByFields []OrderBy
@@ -38,7 +38,7 @@ func (this OrderByFields) String() string {
 	return strings.Join(columns, ",")
 }
 
-func (b *Builder) OrderBy(field string, columnOrderType ...contracts.OrderType) contracts.QueryBuilder {
+func (b *Builder) OrderBy(field string, columnOrderType ...IDatabase.OrderType) IDatabase.QueryBuilder {
 	if len(columnOrderType) > 0 {
 		b.orderBy = append(b.orderBy, OrderBy{
 			field:          field,
@@ -47,22 +47,22 @@ func (b *Builder) OrderBy(field string, columnOrderType ...contracts.OrderType) 
 	} else {
 		b.orderBy = append(b.orderBy, OrderBy{
 			field:          field,
-			fieldOrderType: contracts.Asc,
+			fieldOrderType: IDatabase.Asc,
 		})
 	}
 
 	return b
 }
 
-func (b *Builder) OrderByDesc(field string) contracts.QueryBuilder {
+func (b *Builder) OrderByDesc(field string) IDatabase.QueryBuilder {
 	b.orderBy = append(b.orderBy, OrderBy{
 		field:          field,
-		fieldOrderType: contracts.Desc,
+		fieldOrderType: IDatabase.Desc,
 	})
 	return b
 }
 
-func (b *Builder) InRandomOrder(orderFunc ...contracts.OrderType) contracts.QueryBuilder {
+func (b *Builder) InRandomOrder(orderFunc ...IDatabase.OrderType) IDatabase.QueryBuilder {
 	fn := RandomOrder
 	if len(orderFunc) > 0 {
 		fn = orderFunc[0]

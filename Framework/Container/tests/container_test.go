@@ -2,10 +2,11 @@ package tests
 
 import (
 	"fmt"
+	"github.com/kmsar/laravel-go/Framework/Support/Utils"
 
 	"github.com/kmsar/laravel-go/Framework/Container"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IContainer"
-	"github.com/kmsar/laravel-go/Framework/Support/supports-master/utils"
+
 	"github.com/stretchr/testify/assert"
 	"reflect"
 	"testing"
@@ -45,7 +46,7 @@ func TestBaseContainer(t *testing.T) {
 		return DemoParam{Id: "测试一下"}
 	})
 
-	assert.True(t, app.Get(utils.GetTypeKey(reflect.TypeOf(DemoParam{}))).(DemoParam).Id == "测试一下")
+	assert.True(t, app.Get(Utils.GetTypeKey(reflect.TypeOf(DemoParam{}))).(DemoParam).Id == "测试一下")
 
 	app.Call(Container.NewMagicalFunc(func(param DemoParam) {
 		assert.True(t, param.Id == "测试一下")

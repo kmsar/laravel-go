@@ -5,6 +5,7 @@ import (
 	"github.com/kmsar/laravel-go/Framework/Contracts/IConfig"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IHashing"
 	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
+	"github.com/kmsar/laravel-go/Framework/Logs"
 	"github.com/kmsar/laravel-go/Framework/Support/Field"
 	"github.com/kmsar/laravel-go/Framework/Support/Str"
 )

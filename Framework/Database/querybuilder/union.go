@@ -2,10 +2,10 @@ package querybuilder
 
 import (
 	"fmt"
-	"github.com/goal-web/contracts"
+	"github.com/kmsar/laravel-go/Framework/Contracts/IDatabase"
 )
 
-type Unions map[contracts.UnionJoinType][]contracts.QueryBuilder
+type Unions map[IDatabase.UnionJoinType][]IDatabase.QueryBuilder
 
 func (this Unions) IsEmpty() bool {
 	return len(this) == 0
@@ -24,26 +24,26 @@ func (this Unions) String() (result string) {
 	return
 }
 
-func (b *Builder) Union(builder contracts.QueryBuilder, unionType ...contracts.UnionJoinType) contracts.QueryBuilder {
+func (b *Builder) Union(builder IDatabase.QueryBuilder, unionType ...IDatabase.UnionJoinType) IDatabase.QueryBuilder {
 	if builder != nil {
 		if len(unionType) > 0 {
 			b.unions[unionType[0]] = append(b.unions[unionType[0]], builder)
 		} else {
-			b.unions[contracts.Union] = append(b.unions[contracts.Union], builder)
+			b.unions[IDatabase.Union] = append(b.unions[IDatabase.Union], builder)
 		}
 	}
 
 	return b.addBinding(unionBinding, builder.GetBindings()...)
 }
 
-func (b *Builder) UnionAll(builder contracts.QueryBuilder) contracts.QueryBuilder {
-	return b.Union(builder, contracts.UnionAll)
+func (b *Builder) UnionAll(builder IDatabase.QueryBuilder) IDatabase.QueryBuilder {
+	return b.Union(builder, IDatabase.UnionAll)
 }
 
-func (b *Builder) UnionByProvider(builder contracts.QueryProvider, unionType ...contracts.UnionJoinType) contracts.QueryBuilder {
+func (b *Builder) UnionByProvider(builder IDatabase.QueryProvider, unionType ...IDatabase.UnionJoinType) IDatabase.QueryBuilder {
 	return b.Union(builder(), unionType...)
 }
 
-func (b *Builder) UnionAllByProvider(builder contracts.QueryProvider) contracts.QueryBuilder {
-	return b.Union(builder(), contracts.UnionAll)
+func (b *Builder) UnionAllByProvider(builder IDatabase.QueryProvider) IDatabase.QueryBuilder {
+	return b.Union(builder(), IDatabase.UnionAll)
 }

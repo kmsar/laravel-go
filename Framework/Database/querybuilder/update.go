@@ -2,13 +2,13 @@ package querybuilder
 
 import (
 	"fmt"
-	"github.com/goal-web/contracts"
+	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 	"strings"
 )
 
 type Expression string
 
-func (b *Builder) UpdateSql(value contracts.Fields) (sql string, bindings []interface{}) {
+func (b *Builder) UpdateSql(value Support.Fields) (sql string, bindings []interface{}) {
 	if len(value) == 0 {
 		return
 	}

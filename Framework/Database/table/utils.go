@@ -2,10 +2,11 @@ package table
 
 import (
 	"database/sql"
-	"github.com/goal-web/contracts"
+
+	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 )
 
-func ParseRows(rows *sql.Rows) ([]contracts.Fields, error) {
+func ParseRows(rows *sql.Rows) ([]Support.Fields, error) {
 	columns, err := rows.Columns()
 	if err != nil {
 		return nil, err
@@ -16,7 +17,7 @@ func ParseRows(rows *sql.Rows) ([]contracts.Fields, error) {
 		var a interface{}
 		cache[index] = &a
 	}
-	var results []contracts.Fields
+	var results []Support.Fields
 	for rows.Next() {
 		_ = rows.Scan(cache...)
 

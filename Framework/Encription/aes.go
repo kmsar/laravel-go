@@ -5,10 +5,10 @@ import (
 	"crypto/aes"
 	"crypto/cipher"
 	"encoding/base64"
-	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
-	"github.com/pkg/errors"
-
+	"errors"
+	"fmt"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IEncryption"
+	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 )
 
 type aesEncryptor struct {
@@ -54,7 +54,7 @@ func (this *aesEncryptor) Decode(encrypted string) (result string, err error) {
 			case error:
 				err = value
 			default:
-				err = errors.Errorf("%v", value)
+				err = errors.New(fmt.Sprintf("%v", value))
 			}
 		}
 

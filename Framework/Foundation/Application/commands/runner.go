@@ -12,7 +12,7 @@ import (
 )
 
 type runner struct {
-	IConsole.Command
+	Commands.Command
 	app IFoundation.IApplication
 }
 

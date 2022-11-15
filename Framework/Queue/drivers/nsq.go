@@ -4,6 +4,7 @@ import (
 	"github.com/kmsar/laravel-go/Framework/Contracts/IQueue"
 	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 	"github.com/kmsar/laravel-go/Framework/Logs"
+	"github.com/nsqio/go-nsq"
 	"time"
 )
 

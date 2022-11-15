@@ -2,12 +2,12 @@ package querybuilder
 
 import (
 	"fmt"
-	"github.com/goal-web/contracts"
+	"github.com/kmsar/laravel-go/Framework/Contracts/IDatabase"
 )
 
 type Join struct {
 	table      string
-	join       contracts.JoinType
+	join       IDatabase.JoinType
 	conditions *Wheres
 }
 
@@ -42,13 +42,13 @@ func (this Joins) String() (result string) {
 	return
 }
 
-func (b *Builder) Join(table string, first, condition, second string, joins ...contracts.JoinType) contracts.QueryBuilder {
-	join := contracts.InnerJoin
+func (b *Builder) Join(table string, first, condition, second string, joins ...IDatabase.JoinType) IDatabase.QueryBuilder {
+	join := IDatabase.InnerJoin
 	if len(joins) > 0 {
 		join = joins[0]
 	}
-	b.joins = append(b.joins, Join{table, join, &Wheres{wheres: map[contracts.WhereJoinType][]*Where{
-		contracts.And: {&Where{
+	b.joins = append(b.joins, Join{table, join, &Wheres{wheres: map[IDatabase.WhereJoinType][]*Where{
+		IDatabase.And: {&Where{
 			field:     first,
 			condition: condition,
 			arg:       second,
@@ -58,14 +58,14 @@ func (b *Builder) Join(table string, first, condition, second string, joins ...c
 	return b
 }
 
-func (b *Builder) JoinSub(provider contracts.QueryProvider, as, first, condition, second string, joins ...contracts.JoinType) contracts.QueryBuilder {
-	join := contracts.InnerJoin
+func (b *Builder) JoinSub(provider IDatabase.QueryProvider, as, first, condition, second string, joins ...IDatabase.JoinType) IDatabase.QueryBuilder {
+	join := IDatabase.InnerJoin
 	if len(joins) > 0 {
 		join = joins[0]
 	}
 	subBuilder := provider()
-	b.joins = append(b.joins, Join{fmt.Sprintf("(%s) as %s", subBuilder.ToSql(), as), join, &Wheres{wheres: map[contracts.WhereJoinType][]*Where{
-		contracts.And: {&Where{
+	b.joins = append(b.joins, Join{fmt.Sprintf("(%s) as %s", subBuilder.ToSql(), as), join, &Wheres{wheres: map[IDatabase.WhereJoinType][]*Where{
+		IDatabase.And: {&Where{
 			field:     first,
 			condition: condition,
 			arg:       second,
@@ -75,17 +75,17 @@ func (b *Builder) JoinSub(provider contracts.QueryProvider, as, first, condition
 	return b.addBinding(joinBinding, subBuilder.GetBindings()...)
 }
 
-func (b *Builder) FullJoin(table string, first, condition, second string) contracts.QueryBuilder {
-	return b.Join(table, first, condition, second, contracts.FullJoin)
+func (b *Builder) FullJoin(table string, first, condition, second string) IDatabase.QueryBuilder {
+	return b.Join(table, first, condition, second, IDatabase.FullJoin)
 }
-func (b *Builder) FullOutJoin(table string, first, condition, second string) contracts.QueryBuilder {
-	return b.Join(table, first, condition, second, contracts.FullOutJoin)
-}
-
-func (b *Builder) LeftJoin(table string, first, condition, second string) contracts.QueryBuilder {
-	return b.Join(table, first, condition, second, contracts.LeftJoin)
+func (b *Builder) FullOutJoin(table string, first, condition, second string) IDatabase.QueryBuilder {
+	return b.Join(table, first, condition, second, IDatabase.FullOutJoin)
 }
 
-func (b *Builder) RightJoin(table string, first, condition, second string) contracts.QueryBuilder {
-	return b.Join(table, first, condition, second, contracts.RightJoin)
+func (b *Builder) LeftJoin(table string, first, condition, second string) IDatabase.QueryBuilder {
+	return b.Join(table, first, condition, second, IDatabase.LeftJoin)
+}
+
+func (b *Builder) RightJoin(table string, first, condition, second string) IDatabase.QueryBuilder {
+	return b.Join(table, first, condition, second, IDatabase.RightJoin)
 }

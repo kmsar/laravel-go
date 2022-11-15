@@ -6,7 +6,7 @@ import (
 	"github.com/kmsar/laravel-go/Framework/Contracts/IContainer"
 	"github.com/kmsar/laravel-go/Framework/Support/Exceptions"
 	"github.com/kmsar/laravel-go/Framework/Support/Utils"
-	"github.com/kmsar/laravel-go/Framework/Support/supports-master/utils"
+
 	"reflect"
 	"sync"
 )
@@ -349,7 +349,7 @@ func (this *Container) Resolve(abstraction any, args ...any) {
 	if receiverType.Kind() == reflect.Ptr {
 		elem := receiverType.Elem()
 
-		key := utils.GetTypeKey(elem)
+		key := Utils.GetTypeKey(elem)
 		instance := this.Get(key)
 		reflect.ValueOf(abstraction).Elem().Set(reflect.ValueOf(instance))
 		return

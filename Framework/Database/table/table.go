@@ -1,15 +1,12 @@
 package table
 
 import (
-	//"github.com/goal-web/application"
-	//"github.com/goal-web/contracts"
-	//"github.com/goal-web/querybuilder"
-	//"github.com/goal-web/supports/exceptions"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IDatabase"
 	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 	"github.com/kmsar/laravel-go/Framework/Database/querybuilder"
+	"github.com/kmsar/laravel-go/Framework/Foundation/Application"
+
 	"github.com/kmsar/laravel-go/Framework/Support/Exceptions"
-	"next-doc/app/application"
 )
 
 type Table struct {
@@ -33,7 +30,7 @@ func getTable(name string) *Table {
 }
 
 func Query(name string) *Table {
-	return getTable(name).SetConnection(application.App().Get("db").(IDatabase.DBConnection))
+	return getTable(name).SetConnection(Application.Get("db").(IDatabase.DBConnection))
 }
 
 func FromModel(model IDatabase.Model) *Table {
@@ -56,7 +53,7 @@ func (this *Table) SetConnection(connection interface{}) *Table {
 	if conn, ok := connection.(IDatabase.DBConnection); ok {
 		this.executor = conn
 	} else {
-		this.executor = application.App(nil).Get("db.factory").(IDatabase.DBFactory).Connection(connection.(string))
+		this.executor = Application.Get("db.factory").(IDatabase.DBFactory).Connection(connection.(string))
 	}
 	return this
 }

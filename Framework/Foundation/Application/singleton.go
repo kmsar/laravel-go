@@ -1,4 +1,4 @@
-package application
+package Application
 
 import (
 	"github.com/kmsar/laravel-go/Framework/Container"

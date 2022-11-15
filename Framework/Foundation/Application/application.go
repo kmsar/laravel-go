@@ -1,11 +1,12 @@
-package application
+package Application
 
 import (
 	"github.com/kmsar/laravel-go/Framework/Contracts/IConfig"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IContainer"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IFoundation"
+	"github.com/kmsar/laravel-go/Framework/Support/Parallel"
 	"github.com/kmsar/laravel-go/Framework/Support/Utils"
-	"github.com/qbhy/parallel"
+
 	"reflect"
 )
 
@@ -35,7 +36,7 @@ func (this *application) Debug() bool {
 
 func (this *application) Start() map[string]error {
 	errors := make(map[string]error)
-	queue := parallel.NewParallel(len(this.services))
+	queue := Parallel.NewParallel(len(this.services))
 
 	for _, service := range this.services {
 		(func(service IFoundation.ServiceProvider) {

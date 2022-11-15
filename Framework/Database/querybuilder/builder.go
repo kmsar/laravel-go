@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"github.com/kmsar/laravel-go/Framework/Contracts/IDatabase"
 	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
-	"github.com/kmsar/laravel-go/Framework/Support/Str"
-	"github.com/kmsar/laravel-go/Framework/Support/Utils/Convert"
+	"github.com/kmsar/laravel-go/Framework/Support/supports-master/utils"
+
 	"strings"
 )
 
@@ -91,7 +91,7 @@ func (b *Builder) prepareArgs(condition string, args interface{}) (raw string, b
 	switch condition {
 	case "in", "not in", "between", "not between":
 		isInGrammar := strings.Contains(condition, "in")
-		joinSymbol := Str.IfString(isInGrammar, ",", " and ")
+		joinSymbol := utils.IfString(isInGrammar, ",", " and ")
 		var stringArg string
 		switch arg := args.(type) {
 		case string:
@@ -101,16 +101,16 @@ func (b *Builder) prepareArgs(condition string, args interface{}) (raw string, b
 		case []string:
 			stringArg = strings.Join(arg, joinSymbol)
 		case []int:
-			stringArg = Str.JoinIntArray(arg, joinSymbol)
+			stringArg = utils.JoinIntArray(arg, joinSymbol)
 		case []int64:
-			stringArg = Str.JoinInt64Array(arg, joinSymbol)
+			stringArg = utils.JoinInt64Array(arg, joinSymbol)
 		case []float64:
-			stringArg = Str.JoinFloat64Array(arg, joinSymbol)
+			stringArg = utils.JoinFloat64Array(arg, joinSymbol)
 		case []float32:
-			stringArg = Str.JoinFloatArray(arg, joinSymbol)
+			stringArg = utils.JoinFloatArray(arg, joinSymbol)
 		case []interface{}:
 			bindings = arg
-			raw = fmt.Sprintf("(%s)", strings.Join(Str.MakeSymbolArray("?", len(bindings)), ","))
+			raw = fmt.Sprintf("(%s)", strings.Join(utils.MakeSymbolArray("?", len(bindings)), ","))
 			return
 		default:
 			panic(ParamException{errors.New("不支持的参数类型"), Support.Fields{
@@ -118,17 +118,17 @@ func (b *Builder) prepareArgs(condition string, args interface{}) (raw string, b
 				"condition": condition,
 			}})
 		}
-		bindings = Str.StringArray2InterfaceArray(strings.Split(stringArg, joinSymbol))
+		bindings = utils.StringArray2InterfaceArray(strings.Split(stringArg, joinSymbol))
 		if isInGrammar {
-			raw = fmt.Sprintf("(%s)", strings.Join(Str.MakeSymbolArray("?", len(bindings)), ","))
+			raw = fmt.Sprintf("(%s)", strings.Join(utils.MakeSymbolArray("?", len(bindings)), ","))
 		} else {
 			raw = "? and ?"
 		}
 	case "is", "is not", "exists", "not exists":
-		raw = Convert.ConvertToString(args, "")
+		raw = utils.ConvertToString(args, "")
 	default:
 		raw = "?"
-		bindings = append(bindings, Convert.ConvertToString(args, ""))
+		bindings = append(bindings, utils.ConvertToString(args, ""))
 	}
 
 	return

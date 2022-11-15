@@ -5,6 +5,7 @@ import (
 	"github.com/kmsar/laravel-go/Framework/Contracts/IDatabase"
 	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 	"github.com/kmsar/laravel-go/Framework/Support/Str"
+	"github.com/kmsar/laravel-go/Framework/Support/Utils"
 	"strings"
 )
 

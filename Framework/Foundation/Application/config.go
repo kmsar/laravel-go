@@ -1,4 +1,4 @@
-package application
+package Application
 
 type Config struct {
 	ServerId string
