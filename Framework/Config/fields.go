@@ -1,13 +1,13 @@
 package Config
 
 import (
-	"github.com/goal-web/contracts"
+	"github.com/kmsar/laravel-go/Framework/Contracts/Support"
 )
 
 type FieldsProvider struct {
-	Data contracts.Fields
+	Data Support.Fields
 }
 
-func (provider FieldsProvider) Fields() contracts.Fields {
+func (provider FieldsProvider) Fields() Support.Fields {
 	return provider.Data
 }
