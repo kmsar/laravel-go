@@ -30,6 +30,9 @@ func (this *ServiceProvider) Register(application IFoundation.IApplication) {
 func (this *ServiceProvider) Start() error {
 	return nil
 }
-
+func (this *ServiceProvider) Boot(application IFoundation.IApplication) {
+	//TODO implement me
+	panic("implement me")
+}
 func (this *ServiceProvider) Stop() {
 }

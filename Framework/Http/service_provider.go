@@ -25,7 +25,10 @@ func (this *ServiceProvider) Stop() {
 		dispatcher.Dispatch(&ServeClosed{})
 	})
 }
-
+func (this *ServiceProvider) Boot(application IFoundation.IApplication) {
+	//TODO implement me
+	panic("implement me")
+}
 func (this *ServiceProvider) Start() error {
 	for _, collector := range this.RouteCollectors {
 		this.app.Call(collector)

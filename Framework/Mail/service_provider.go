@@ -61,3 +61,7 @@ func (service *ServiceProvider) Start() error {
 
 func (service *ServiceProvider) Stop() {
 }
+func (this *ServiceProvider) Boot(application IFoundation.IApplication) {
+	//TODO implement me
+	panic("implement me")
+}

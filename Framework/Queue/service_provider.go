@@ -41,6 +41,10 @@ func (this *ServiceProvider) Start() error {
 	this.runWorkers()
 	return nil
 }
+func (this *ServiceProvider) Boot(application IFoundation.IApplication) {
+	//TODO implement me
+	panic("implement me")
+}
 
 // runWorkers 运行所有 worker
 func (this *ServiceProvider) runWorkers() {

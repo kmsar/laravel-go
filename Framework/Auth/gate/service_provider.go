@@ -11,6 +11,11 @@ type ServiceProvider struct {
 	Policies map[Support.Class]IAuth.Policy
 }
 
+func (this *ServiceProvider) Boot(application IFoundation.IApplication) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (this *ServiceProvider) Register(application IFoundation.IApplication) {
 	this.app = application
 	application.NamedSingleton("gate.factory", func() IAuth.GateFactory {
