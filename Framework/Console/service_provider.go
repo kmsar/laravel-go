@@ -30,6 +30,11 @@ type ServiceProvider struct {
 	exceptionHandler IExeption.ExceptionHandler
 }
 
+func (this *ServiceProvider) Boot(application IFoundation.IApplication) {
+	//TODO implement me
+	panic("implement me")
+}
+
 func (this *ServiceProvider) Register(application IFoundation.IApplication) {
 	this.app = application
 	this.exceptionHandler = application.Get("exceptions.handler").(IExeption.ExceptionHandler)
