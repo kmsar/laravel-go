@@ -1,2 +1,2 @@
-# laravel-go-version-v2
+# laravel-go-version
 version 1.0.0
